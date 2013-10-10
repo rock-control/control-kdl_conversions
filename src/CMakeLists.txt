@@ -1,7 +1,6 @@
 rock_library(kdl_conversions
-    SOURCES Dummy.cpp
-    HEADERS Dummy.hpp)
+    SOURCES KDLConversions.cpp
+    HEADERS KDLConversions.hpp
+    DEPS_PKGCONFIG base-lib eigen3 orocos-kdl)
 
-rock_executable(kdl_conversions_bin Main.cpp
-    DEPS kdl_conversions)
 
