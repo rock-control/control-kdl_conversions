@@ -1,28 +1,32 @@
 #include <boost/test/unit_test.hpp>
 #include <kdl_conversions/KDLConversions.hpp>
 #include <kdl/frames_io.hpp>
+#include <stdlib.h>
 
 using namespace kdl_conversions;
 using namespace std;
 
-const double X_ROT = 3.003;
-const double Y_ROT = .086;
-const double Z_ROT = 1.422;
-
-const double X = 0;
-const double Y = 1;
-const double Z = 2;
-
-const double X_VEL = 0;
-const double Y_VEL = 1;
-const double Z_VEL = 2;
-
-const double X_ROT_VEL = 3;
-const double Y_ROT_VEL = 4;
-const double Z_ROT_VEL = 5;
 
 BOOST_AUTO_TEST_CASE(from_kdl_to_base_types)
 {
+    srand (time(NULL));
+
+    const double X_ROT = (rand()%1000)/1000.0;;
+    const double Y_ROT = (rand()%1000)/1000.0;;
+    const double Z_ROT = (rand()%1000)/1000.0;;
+
+    const double X = (rand()%1000)/1000.0;;
+    const double Y = (rand()%1000)/1000.0;1;
+    const double Z = (rand()%1000)/1000.0;;
+
+    const double X_VEL = (rand()%1000)/1000.0;;
+    const double Y_VEL = (rand()%1000)/1000.0;;
+    const double Z_VEL = (rand()%1000)/1000.0;;
+
+    const double X_ROT_VEL = (rand()%1000)/1000.0;;
+    const double Y_ROT_VEL = (rand()%1000)/1000.0;;
+    const double Z_ROT_VEL = (rand()%1000)/1000.0;;
+
     cout<<"Pose Data: "<<endl;
     cout<<"Position: ["<<X<<", "<<Y<<", "<<Z<<"]"<<endl;
     cout<<"Orientation: "<<endl;
