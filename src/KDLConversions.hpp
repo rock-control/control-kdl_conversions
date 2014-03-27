@@ -4,7 +4,6 @@
 #include <iostream>
 #include <kdl/frames.hpp>
 #include <base/samples/rigid_body_state.h>
-#include <base/samples/Wrench.hpp>
 
 
 namespace kdl_conversions
@@ -16,9 +15,6 @@ void KDL2RigidBodyState(const KDL::Frame &pose_in, const KDL::Twist &twist_in, b
 void RigidBodyState2KDL(const base::samples::RigidBodyState& in, KDL::Frame& out);
 void RigidBodyState2KDL(const base::samples::RigidBodyState& in, KDL::Twist& out);
 void RigidBodyState2KDL(const base::samples::RigidBodyState& in, KDL::Frame& pose_out, KDL::Twist& twist_out);
-
-void BaseVector3dToKDLVector(const base::Vector3d& in, KDL::Vector& out);
-void WrenchToKDLWrench(const base::samples::Wrench& in, KDL::Wrench& out);
 
 } // end namespace kdl_conversions
 
