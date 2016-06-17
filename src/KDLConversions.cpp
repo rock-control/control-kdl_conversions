@@ -38,6 +38,16 @@ void RigidBodyState2KDL(const base::samples::RigidBodyState& in, KDL::Frame& pos
     RigidBodyState2KDL(in, twist_out);
 }
 
+void BaseVector3dToKDLVector(const base::Vector3d& in, KDL::Vector& out){
+    for(uint i = 0; i < 3; i++)
+        out(i) = in(i);
+}
+
+void WrenchToKDLWrench(const base::samples::Wrench& in, KDL::Wrench& out){
+    BaseVector3dToKDLVector(in.force, out.force);
+    BaseVector3dToKDLVector(in.torque, out.torque);
+}
+
 void baseJointLimits2KDLJntLimitArray(const base::JointLimits& jointLimits, KDL::JntArray& qMin, KDL::JntArray& qMax)
 {
   qMin.resize(jointLimits.names.size());

@@ -6,6 +6,7 @@
   <license></license>
   <url>http://</url>
   <logo>http://</logo>
+  <tags>stable</tags>
   <depend package="base/cmake" />
   <!--
    To add any dependencies use the depend tag
