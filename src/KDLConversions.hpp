@@ -23,6 +23,15 @@ void RigidBodyState2KDL(const base::samples::RigidBodyState& in, KDL::Frame& pos
 void BaseVector3dToKDLVector(const base::Vector3d& in, KDL::Vector& out);
 void WrenchToKDLWrench(const base::samples::Wrench& in, KDL::Wrench& out);
 
+void baseJointLimits2KDLJntLimitArray(const std::string& startJoint, const std::string& endJoint,const base::JointLimits& jointLimits, KDL::JntArray& qMin, KDL::JntArray& qMax);
+void baseJointLimits2KDLJntLimitArray(const base::JointLimits& jointLimits, KDL::JntArray& qMin, KDL::JntArray& qMax);
+
+void baseJoints2KDLJntArray(const std::string& startJoint, const std::string& endJoint, const base::samples::Joints& jointSamples, KDL::JntArray& jntArray);
+void baseJoints2KDLJntArray(const base::samples::Joints& jointSamples, KDL::JntArray& jntArray);
+
+void KDLJntArray2baseJoints(const std::string& startJoint, const std::string& endJoint, const KDL::JntArray& jntArray, base::samples::Joints& jointSamples);
+void KDLJntArray2baseJoints(const KDL::JntArray& jntArray, base::samples::Joints& jointSamples);
+
 } // end namespace kdl_conversions
 
 #endif

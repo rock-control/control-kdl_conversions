@@ -48,78 +48,62 @@ void WrenchToKDLWrench(const base::samples::Wrench& in, KDL::Wrench& out){
     BaseVector3dToKDLVector(in.torque, out.torque);
 }
 
-void baseJointLimits2KDLJntLimitArray(const base::JointLimits& jointLimits, KDL::JntArray& qMin, KDL::JntArray& qMax)
-{
-  qMin.resize(jointLimits.names.size());
-  qMax.resize(jointLimits.names.size());
-  for(unsigned int i=0; i<jointLimits.names.size(); i++)
-  {
-    qMin(i) = jointLimits[i].min.position;
-    qMax(i) = jointLimits[i].max.position;
-  }
+void baseJointLimits2KDLJntLimitArray(const base::JointLimits& jointLimits, KDL::JntArray& qMin, KDL::JntArray& qMax){
+    qMin.resize(jointLimits.names.size());
+    qMax.resize(jointLimits.names.size());
+    for(unsigned int i=0; i<jointLimits.names.size(); i++)
+    {
+        qMin(i) = jointLimits[i].min.position;
+        qMax(i) = jointLimits[i].max.position;
+    }
 }
 
-void baseJointLimits2KDLJntLimitArray(const std::string& startJoint, const std::string& endJoint, const base::JointLimits& jointLimits, KDL::JntArray& qMin, KDL::JntArray& qMax)
-{
-  qMin.resize(jointLimits.names.size());
-  qMax.resize(jointLimits.names.size());
-  for(unsigned int i=jointLimits.mapNameToIndex(startJoint); i<jointLimits.mapNameToIndex(endJoint)+1; i++)
-  {
-    qMin(i) = jointLimits[i].min.position;
-    qMax(i) = jointLimits[i].max.position;
-  }
+void baseJointLimits2KDLJntLimitArray(const std::string& startJoint, const std::string& endJoint, const base::JointLimits& jointLimits, KDL::JntArray& qMin, KDL::JntArray& qMax){
+    qMin.resize(jointLimits.names.size());
+    qMax.resize(jointLimits.names.size());
+    for(unsigned int i=jointLimits.mapNameToIndex(startJoint); i<jointLimits.mapNameToIndex(endJoint)+1; i++)
+    {
+        qMin(i) = jointLimits[i].min.position;
+        qMax(i) = jointLimits[i].max.position;
+    }
 }
 
-void baseJoints2KDLJntArray(const base::samples::Joints& jointSamples, KDL::JntArray& jntArray)
-{
-  jntArray.resize(jointSamples.names.size());
+void baseJoints2KDLJntArray(const base::samples::Joints& jointSamples, KDL::JntArray& jntArray){
+    jntArray.resize(jointSamples.names.size());
   
-  for(unsigned int i=0; i<jointSamples.names.size(); i++)
-  {
-    jntArray(i) = jointSamples.elements[i].position;
-  }
-}
-
-void baseJoints2KDLJntArray(const std::string& startJoint, const std::string& endJoint, const base::samples::Joints& jointSamples, KDL::JntArray& jntArray)
-{
-  jntArray.resize(jointSamples.names.size());
-  for(unsigned int i=jointSamples.mapNameToIndex(startJoint); i<jointSamples.mapNameToIndex(endJoint)+1; i++)
-  {
-    jntArray(i) = jointSamples.elements[i].position;
-  }
-}
-
-void KDLJntArray2baseJoints(const KDL::JntArray& jntArray, base::samples::Joints& jointSamples)
-{
-  if(jntArray.rows()!=jointSamples.elements.size())
-  {
-    throw std::runtime_error("KDLJntArray2baseJoints: Mismatch in number of elements in KDL Joint Array annd base Joint Samples");
-  }
-  else
-  {
     for(unsigned int i=0; i<jointSamples.names.size(); i++)
-    {
-      jointSamples.elements[i].position = jntArray(i);
-    }
-  }
+        jntArray(i) = jointSamples.elements[i].position;
 }
 
-void KDLJntArray2baseJoints(const std::string& startJoint, const std::string& endJoint, const KDL::JntArray& jntArray, base::samples::Joints& jointSamples)
-{
-  unsigned start= jointSamples.mapNameToIndex(startJoint);
-  unsigned end= jointSamples.mapNameToIndex(endJoint);
-  
-  if(jntArray.rows()!= end-start+1)
-  {
-    throw std::runtime_error("KDLJntArray2baseJoints: Mismatch in number of elements in KDL Joint Array annd base Joint Samples");
-  }
-  else
-  {
+void baseJoints2KDLJntArray(const std::string& startJoint, const std::string& endJoint, const base::samples::Joints& jointSamples, KDL::JntArray& jntArray){
+    jntArray.resize(jointSamples.names.size());
     for(unsigned int i=jointSamples.mapNameToIndex(startJoint); i<jointSamples.mapNameToIndex(endJoint)+1; i++)
+        jntArray(i) = jointSamples.elements[i].position;
+}
+
+void KDLJntArray2baseJoints(const KDL::JntArray& jntArray, base::samples::Joints& jointSamples){
+    if(jntArray.rows()!=jointSamples.elements.size())
+        throw std::runtime_error("KDLJntArray2baseJoints: Mismatch in number of elements in KDL Joint Array annd base Joint Samples");
+    
+    else
     {
-      jointSamples.elements[i].position = jntArray(i);
+        for(unsigned int i=0; i<jointSamples.names.size(); i++)
+            jointSamples.elements[i].position = jntArray(i);
     }
-  }    
+}
+
+void KDLJntArray2baseJoints(const std::string& startJoint, const std::string& endJoint, const KDL::JntArray& jntArray, base::samples::Joints& jointSamples){
+    unsigned start= jointSamples.mapNameToIndex(startJoint);
+    unsigned end= jointSamples.mapNameToIndex(endJoint);
+  
+    if(jntArray.rows()!= end-start+1)
+        throw std::runtime_error("KDLJntArray2baseJoints: Mismatch in number of elements in KDL Joint Array annd base Joint Samples");
+    
+    else
+    {
+        for(unsigned int i=jointSamples.mapNameToIndex(startJoint); i<jointSamples.mapNameToIndex(endJoint)+1; i++)
+            jointSamples.elements[i].position = jntArray(i);
+    }    
 }
 
 }
