@@ -16,7 +16,7 @@ BOOST_AUTO_TEST_CASE(from_kdl_to_base_types)
     const double Z_ROT = (rand()%1000)/1000.0;;
 
     const double X = (rand()%1000)/1000.0;;
-    const double Y = (rand()%1000)/1000.0;1;
+    const double Y = (rand()%1000)/1000.0;;
     const double Z = (rand()%1000)/1000.0;;
 
     const double X_VEL = (rand()%1000)/1000.0;;
