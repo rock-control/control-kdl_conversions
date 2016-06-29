@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <kdl/frames.hpp>
-#include <base/samples/rigid_body_state.h>
+#include <base/samples/RigidBodyState.hpp>
 #include <base/samples/Wrench.hpp>
 #include <base/JointLimits.hpp>
 #include <base/samples/Joints.hpp>
